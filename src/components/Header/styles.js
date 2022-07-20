@@ -3,12 +3,15 @@ import { motion } from "framer-motion";
 import { HEADER_HEIGHT } from "../../utils";
 
 export const HeaderContainer = styled(motion.div)`
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   background-color: #ffcc00;
   height: ${HEADER_HEIGHT};
+  z-index: 10;
 `;
 
 export const LogoContainer = styled.div`

@@ -1,11 +1,17 @@
 import React from "react";
-import { Wrapper } from "./styles";
+import { Wrapper, TitleContainer, Title, Overlay } from "./styles";
 
 function Home() {
   return (
-    <Wrapper>
-      <div>home </div>
-    </Wrapper>
+    <>
+      {/* <Overlay /> */}
+      <Wrapper>
+        <TitleContainer>
+          <Title>Snap by</Title>
+          <Title>Manuel</Title>
+        </TitleContainer>
+      </Wrapper>
+    </>
   );
 }
 
