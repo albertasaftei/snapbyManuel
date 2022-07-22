@@ -6,7 +6,6 @@ import {
   Option,
   OptionsContainer,
 } from "./styles";
-import logo from "../../icons/logo.png";
 
 function Header() {
   return (
@@ -16,7 +15,8 @@ function Header() {
       animate={{ y: 0 }}
     >
       <LogoContainer>
-        <Logo src={logo} />
+        <Logo>Manuel</Logo>
+        <Logo>Ferrari</Logo>
       </LogoContainer>
       <OptionsContainer>
         <Option>About</Option>

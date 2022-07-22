@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import background from "../../../src/icons/background.jpg";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   height: 100vh;
   background-color: #111111;
   background-image: url(${background});
@@ -12,7 +13,7 @@ export const Wrapper = styled.div`
   position: relative;
 `;
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -25,14 +26,4 @@ export const Title = styled.span`
   text-transform: uppercase;
   font-weight: bold;
   color: white;
-  word-spacing: -35px;
-`;
-
-export const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  background-color: #111111;
-  width: 100%;
-  height: 100vh;
-  opacity: 0.7;
 `;

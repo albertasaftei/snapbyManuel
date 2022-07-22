@@ -15,13 +15,12 @@ export const HeaderContainer = styled(motion.div)`
 `;
 
 export const LogoContainer = styled.div`
-  height: 100%;
   padding: 0 5%;
+  text-transform: uppercase;
+  font-size: 20px;
 `;
 
-export const Logo = styled.img`
-  height: 100%;
-`;
+export const Logo = styled.div``;
 
 export const OptionsContainer = styled.div`
   display: flex;
