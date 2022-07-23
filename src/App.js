@@ -4,6 +4,8 @@ import { app } from "./base";
 import Header from "./components/Header";
 import Home from "./containers/Home";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./components/Footer";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   // const [fileUrl, setFileUrl] = useState()
@@ -26,10 +28,13 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <AnimatePresence exitBeforeEnter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer />
+      </AnimatePresence>
       {/* <form onSubmit={onSubmit}>
       <input type={'file'} onChange={onChange}/>
       <button>Submit</button>

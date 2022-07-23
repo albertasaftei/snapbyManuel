@@ -11,8 +11,8 @@ function Header() {
   return (
     <HeaderContainer
       transition={{ delay: 0.2, duration: 0.5, type: "tween" }}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
     >
       <LogoContainer>
         <Logo>Manuel</Logo>

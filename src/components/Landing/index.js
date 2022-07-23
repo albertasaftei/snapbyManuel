@@ -3,12 +3,17 @@ import { motion } from "framer-motion";
 import { Wrapper, TitleContainer, Title } from "./styles";
 const wrapperVariants = {
   hidden: {
-    y: "-100vh",
+    x: "-100vw",
+    opacity: 0,
   },
   visible: {
-    y: 0,
+    x: 0,
+    opacity: 1,
+    rotate: [0, 10, 0],
     transition: {
       delay: 0.5,
+      type: "tween",
+      bounce: 1,
       duration: 1,
     },
   },
