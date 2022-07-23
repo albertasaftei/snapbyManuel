@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { app } from "./base";
 import Header from "./components/Header";
 import Home from "./containers/Home";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   // const [fileUrl, setFileUrl] = useState()

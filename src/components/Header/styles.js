@@ -18,9 +18,11 @@ export const LogoContainer = styled.div`
   padding: 0 5%;
   text-transform: uppercase;
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
-export const Logo = styled.div``;
+export const Logo = styled.span``;
 
 export const OptionsContainer = styled.div`
   display: flex;
