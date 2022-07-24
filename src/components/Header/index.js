@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   HeaderContainer,
   LogoContainer,
@@ -15,12 +16,16 @@ function Header() {
       animate={{ opacity: 1 }}
     >
       <LogoContainer>
-        <Logo>Manuel</Logo>
-        <Logo>Ferrari</Logo>
+        <Link to="/" style={{ display: "flex", flexDirection: "column" }}>
+          <Logo>Manuel</Logo>
+          <Logo>Ferrari</Logo>
+        </Link>
       </LogoContainer>
       <OptionsContainer>
         <Option>About</Option>
-        <Option>Portfolio</Option>
+        <Option>
+          <Link to="/portfolio">Portfolio</Link>
+        </Option>
         <Option>Contact</Option>
       </OptionsContainer>
     </HeaderContainer>

@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { app } from "./base";
 import Header from "./components/Header";
 import Home from "./containers/Home";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Footer from "./components/Footer";
 import { AnimatePresence } from "framer-motion";
+import Portfolio from "./containers/Portfolio";
 
 function App() {
+  const location = useLocation();
   // const [fileUrl, setFileUrl] = useState()
   // const onChange = async (e) => {
   //   const file = e.target.files[0]
@@ -30,10 +31,10 @@ function App() {
     <>
       <AnimatePresence exitBeforeEnter>
         <Header />
-        <Routes>
+        <Routes location={location} key={location.key}>
           <Route path="/" element={<Home />} />
+          <Route path="/portfolio" element={<Portfolio />} />
         </Routes>
-        <Footer />
       </AnimatePresence>
       {/* <form onSubmit={onSubmit}>
       <input type={'file'} onChange={onChange}/>
