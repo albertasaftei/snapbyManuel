@@ -54,16 +54,19 @@ function Portfolio() {
     >
       <Container fluid>
         <Row lg={3} md={2} xs={1}>
-          {folders.map((folderName) => (
-            <Col>
-              <Link to="/galleryDetails" state={{ gallery: folderName }}>
-                <Gallery>
-                  <Image></Image>
-                  <GalleryTitle>{folderName}</GalleryTitle>
-                </Gallery>
-              </Link>
-            </Col>
-          ))}
+          {folders.map((folderName) => {
+            if (folderName !== "Landing")
+              return (
+                <Col>
+                  <Link to="/galleryDetails" state={{ gallery: folderName }}>
+                    <Gallery>
+                      <Image></Image>
+                      <GalleryTitle>{folderName}</GalleryTitle>
+                    </Gallery>
+                  </Link>
+                </Col>
+              );
+          })}
         </Row>
       </Container>
 
