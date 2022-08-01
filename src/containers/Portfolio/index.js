@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Wrapper, Gallery, Image, GalleryTitle } from "./styles";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Button, Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { listAll } from "firebase/storage";
+import { rootRef } from "../../base";
 
-const portfolioVarants = {
+const portfolioVariants = {
   hidden: {
     x: "100vw",
   },
@@ -23,35 +27,64 @@ const portfolioVarants = {
 };
 
 function Portfolio() {
+  const [show, setShow] = useState(false);
+  const [folders, setFolders] = useState([]);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    listAll(rootRef)
+      .then((res) => {
+        Promise.all(res.prefixes.map((folder) => folder.name)).then(
+          (folderName) => setFolders(folderName)
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <Wrapper
-      variants={portfolioVarants}
+      variants={portfolioVariants}
       initial={"hidden"}
       animate={"visible"}
       exit="exit"
     >
       <Container fluid>
-        <Row md={2} lg={3} xs={1}>
-          <Col>
-            <Gallery>
-              <Image></Image>
-              <GalleryTitle>Gallery #1</GalleryTitle>
-            </Gallery>
-          </Col>
-          <Col>
-            <Gallery>
-              <Image></Image>
-              <GalleryTitle>Gallery #2</GalleryTitle>
-            </Gallery>
-          </Col>
-          <Col>
-            <Gallery>
-              <Image></Image>
-              <GalleryTitle>Gallery #3</GalleryTitle>
-            </Gallery>
-          </Col>
+        <Row lg={3} md={2} xs={1}>
+          {folders.map((folderName) => (
+            <Col>
+              <Link to="/galleryDetails" state={{ gallery: folderName }}>
+                <Gallery>
+                  <Image></Image>
+                  <GalleryTitle>{folderName}</GalleryTitle>
+                </Gallery>
+              </Link>
+            </Col>
+          ))}
         </Row>
       </Container>
+
+      {/* <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+      <Modal centered show={show} fullscreen onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
     </Wrapper>
   );
 }

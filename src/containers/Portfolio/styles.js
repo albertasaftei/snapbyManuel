@@ -1,21 +1,28 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FOOTER_HEIGHT, HEADER_HEIGHT } from "./../../utils";
+import { HEADER_HEIGHT } from "./../../utils";
 
 export const Wrapper = styled(motion.div)`
   margin-top: ${HEADER_HEIGHT};
-  margin-bottom: -${FOOTER_HEIGHT};
   height: calc(100vh - ${HEADER_HEIGHT});
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a {
+    color: white !important;
+  }
+
+  @media (max-width: 576px) {
+    margin-top: calc(${HEADER_HEIGHT} + 50px);
+  }
 `;
 
 export const Gallery = styled.div``;
 export const GalleryTitle = styled.div`
   text-transform: capitalize;
-  margin-top: 20px;
+  margin: 20px 0;
   font-size: 1.5rem;
 `;
 export const Image = styled.div`

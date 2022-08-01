@@ -12,6 +12,10 @@ export const HeaderContainer = styled(motion.div)`
   background-color: #ffcc00;
   height: ${HEADER_HEIGHT};
   z-index: 10;
+
+  a {
+    color: black !important;
+  }
 `;
 
 export const LogoContainer = styled.div`

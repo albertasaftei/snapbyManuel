@@ -22,7 +22,9 @@ function Header() {
         </Link>
       </LogoContainer>
       <OptionsContainer>
-        <Option>About</Option>
+        {/* <Option>
+          <a href="#about">About</a>
+        </Option> */}
         <Option>
           <Link to="/portfolio">Portfolio</Link>
         </Option>

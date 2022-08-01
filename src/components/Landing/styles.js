@@ -20,8 +20,9 @@ export const TitleContainer = styled(motion.div)`
   padding-left: 5%;
 `;
 
-export const Title = styled.span`
+export const Title = styled.h1`
   font-size: 10rem;
+  line-height: 1;
   text-transform: uppercase;
   font-weight: bold;
   color: white;
