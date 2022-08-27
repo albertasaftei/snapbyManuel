@@ -13,7 +13,7 @@ function MainGallery({ images }) {
       <Row className={rowCommonStyle} style={{ height: "100vh" }}>
         {images.map((image, index) => (
           <Col key={index} className={`${colCommonStyle}`}>
-            <Image src={image} />
+            <Image loading="lazy" src={image} />
           </Col>
         ))}
       </Row>

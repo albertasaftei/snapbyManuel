@@ -4,40 +4,31 @@ import Landing from "../../components/Landing";
 import MainGallery from "../../components/MainGallery";
 import About from "../../components/About";
 import Footer from "../../components/Footer";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
-import { storage } from "../../base";
-
-const homeVarants = {
-  exit: {
-    x: "-100vw",
-    transition: {
-      ease: "easeInOut",
-    },
-  },
-};
+import { getImagesFromFirebase } from "../../utils";
+import { homeVariants } from "./constants";
 
 function Home() {
   const [landingPageImages, setLandingPageImages] = useState([]);
+  const localStorageImages = JSON.parse(localStorage.getItem("homeImages"));
 
   useEffect(() => {
-    function getLandingImagesFromStorage() {
-      const landingPageRef = ref(storage, "Landing/");
+    //set images from local storage if available
+    localStorageImages.length && setLandingPageImages(localStorageImages);
 
-      listAll(landingPageRef)
-        .then((res) => {
-          Promise.all(res.items.map((item) => getDownloadURL(item))).then(
-            (images) => setLandingPageImages(images)
-          );
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-    getLandingImagesFromStorage();
+    //get images from Firebase if not available in local storage
+    !localStorageImages.length &&
+      getImagesFromFirebase({
+        path: "Landing/",
+        setImages: setLandingPageImages,
+      });
+
+    //set Firebase images to local storage
+    landingPageImages.length &&
+      localStorage.setItem("homeImages", JSON.stringify(landingPageImages));
   }, []);
 
   return (
-    <motion.div variants={homeVarants} exit={"exit"}>
+    <motion.div variants={homeVariants} exit={"exit"}>
       <Landing />
       <MainGallery images={landingPageImages} />
       <About />

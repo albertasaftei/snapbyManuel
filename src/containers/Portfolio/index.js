@@ -5,45 +5,39 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { listAll } from "firebase/storage";
-import { rootRef } from "../../base";
-
-const portfolioVariants = {
-  hidden: {
-    x: "100vw",
-  },
-  visible: {
-    x: 0,
-    transition: {
-      type: "tween",
-    },
-  },
-  exit: {
-    x: "100vw",
-    transition: {
-      ease: "easeInOut",
-    },
-  },
-};
+import { getFirstImageFromFolder, getFoldersFromFirebase } from "../../utils";
+import { portfolioVariants } from "./constants";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { storage } from "../../base";
 
 function Portfolio() {
   const [show, setShow] = useState(false);
   const [folders, setFolders] = useState([]);
+  const [firstImage, setFirstImage] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    listAll(rootRef)
-      .then((res) => {
-        Promise.all(res.prefixes.map((folder) => folder.name)).then(
-          (folderName) => setFolders(folderName)
-        );
-      })
-      .catch((error) => {
-        console.error(error);
+  const getImages = (folder) => {
+    const pageRef = ref(storage, `${folder}/`);
+    const state = [...firstImage];
+    listAll(pageRef).then((res) => {
+      Promise.resolve(getDownloadURL(res.items[0])).then((image) => {
+        const result = [...state, image];
+        console.log(result);
+        setFirstImage(result);
       });
-  }, []);
+    });
+  };
+
+  useEffect(() => {
+    !folders.length && getFoldersFromFirebase({ setFolders });
+    if (folders.length) {
+      folders.forEach((folder) => {
+        getImages(folder);
+      });
+    }
+  }, [folders]);
 
   return (
     <Wrapper
@@ -54,19 +48,20 @@ function Portfolio() {
     >
       <Container fluid>
         <Row lg={3} md={2} xs={1}>
-          {folders.map((folderName) => {
-            if (folderName !== "Landing")
-              return (
-                <Col>
-                  <Link to="/galleryDetails" state={{ gallery: folderName }}>
-                    <Gallery>
-                      <Image></Image>
-                      <GalleryTitle>{folderName}</GalleryTitle>
-                    </Gallery>
-                  </Link>
-                </Col>
-              );
-          })}
+          {folders.length &&
+            folders.map((folderName) => {
+              if (folderName !== "Landing")
+                return (
+                  <Col>
+                    <Link to="/galleryDetails" state={{ gallery: folderName }}>
+                      <Gallery>
+                        <Image src={firstImage} />
+                        <GalleryTitle>{folderName}</GalleryTitle>
+                      </Gallery>
+                    </Link>
+                  </Col>
+                );
+            })}
         </Row>
       </Container>
 

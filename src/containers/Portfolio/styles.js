@@ -25,7 +25,8 @@ export const GalleryTitle = styled.div`
   margin: 20px 0;
   font-size: 1.5rem;
 `;
-export const Image = styled.div`
+export const Image = styled.img`
   height: 300px;
-  background-color: black;
+  width: 100%;
+  object-fit: cover;
 `;
