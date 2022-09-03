@@ -1,6 +1,6 @@
 export const homeVariants = {
   exit: {
-    x: "-100vw",
+    y: "100vh",
     transition: {
       ease: "easeInOut",
     },

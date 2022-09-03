@@ -1,4 +1,4 @@
-export const galleryDetailsVariants = {
+export const commonVariants = {
   hidden: {
     y: "100vh",
   },

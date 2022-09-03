@@ -1,15 +1,17 @@
 export const portfolioVariants = {
   hidden: {
-    x: "100vw",
+    y: "100vh",
   },
   visible: {
-    x: 0,
+    y: 0,
     transition: {
       type: "tween",
+      delay: 0.5,
+      duration: 1,
     },
   },
   exit: {
-    x: "-100vw",
+    y: "100vh",
     transition: {
       ease: "easeInOut",
     },
